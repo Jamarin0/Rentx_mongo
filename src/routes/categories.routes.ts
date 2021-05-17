@@ -1,11 +1,10 @@
 import { Router } from "express";
 
 import { CategoriesRepository } from "../modules/car/repositories/CategoriesRepository";
-import { PostgressCategoriesRepository } from "../modules/car/repositories/PostgressCategoriesRepository";
 import { CreateCategoryService } from "../modules/car/services/CreateCategoryService";
 
 const categoriesRoutes = Router();
-const categoriesRepository = new PostgressCategoriesRepository();
+const categoriesRepository = new CategoriesRepository();
 
 categoriesRoutes.post("/", (request, response) => {
     const { name, description } = request.body;
