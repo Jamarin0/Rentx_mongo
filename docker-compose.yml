@@ -1,33 +1,33 @@
 version: "3.9"
 
-services:
-  database: #ESSE É O NOME DO SERVICE QUE DEVE ESTAR NO ARQUIVO DE CRIAÇÃO DE CONEXÃO
-    image: postgres
-    container_name: database_ignite
-    restart: always
-    ports: 
-      - 5432:5432
+services:  
+  database:
+    image: mongo:latest
+    container_name: database
+    env_file: 
+      - .env 
+    ports:
+      - "${DB_PORT}:27017"
+    volumes: 
+        -dbdata-volume:/data/db
     environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=ignite
-      - POSTGRES_DB=rentx
-    volumes:
-      - pgdata:/data/postgres
+       MONGO_INITDB_USERNAME: ${DB_USERNAME}
+       MONGO_INITDB_PASSWORD: ${DB_PASSWORD}
+       MONGO_INITDB_DATABASE: ${DB_DATABASE}
 
   app:
     build: .
-    container_name: rentx
+    container_name: webmotorsclone
     restart: always
-    ports: 
-      - 3333:3333
-      - 9229:9229 #Você pode inserir essa porta tbm pra poder usar o debug
+    env_file: 
+      - .env  
+    ports:
+      - ${APP_PORT}:${APP_PORT}
     volumes: 
-      - .:/usr/app
-    links: 
+       - .:/usr/app
+    links:
       - database
     depends_on:
       - database
-
 volumes:
-  pgdata:
-    driver: local
+    dbdata-volume:

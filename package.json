@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "devteste": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "dev:server": "set NODE_ENV=dev & ts-node-dev src/server.js",
+    "dev:start": "sh -ac '. ./.env; ts-node-dev --inspect --ignore-watch node_modules src/server.ts'",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
   },
   "devDependencies": {
@@ -30,9 +32,11 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "csv-parse": "^4.15.4",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.7",
     "multer": "^1.4.2",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
