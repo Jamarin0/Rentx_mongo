@@ -1,24 +1,28 @@
-import { v4 as uuidV4 } from "uuid";
-import {Column, CreateDateColumn, Entity, PrimaryColumn} from "typeorm";
+import { Schema } from "mongoose";
+import schema from '../../../utils/SchemaUtils';
 
-
-@Entity("categories")
-class Category {
-    @PrimaryColumn()
-    id?: string;
-
-    @Column()
-    name: string;
-
-    @Column()
-    description: string;
-
-    @CreateDateColumn()
-    created_at: Date;
-
-    constructor() {
-        if (!this.id) this.id = uuidV4();
-    }
+export interface ICategory {
+    _id?: String;
+    name?: String;
+    description?: String;   
+    created_at?: Date;
 }
 
-export { Category };
+const categorySchema: Schema<ICategory> = schema({
+     
+    name: { type: String, required: true },
+
+    email:  { type: String, required: true },
+
+    password:  { type: String, required: true },
+
+    driver_license:  { type: String, required: true },
+
+    isAdmin:  { type: Boolean, required: false },
+
+    avatar: { type: String, required: true },
+
+    created_at: { type: String, dafault: Date.now },
+});
+
+export default categorySchema

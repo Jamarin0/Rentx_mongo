@@ -1,23 +1,29 @@
-import { v4 as uuidV4 } from "uuid";
-import { Column, Entity, PrimaryColumn } from "typeorm"
+import { Schema } from "mongoose";
+import schema from '../../../utils/SchemaUtils';
 
-@Entity("specifications")
-class Specification {
-    @PrimaryColumn()
-    id?: string;
-
-    @Column()
-    name: string;
-    
-    @Column()
-    description: string;
-
-    @Column()
-    created_at: Date;
-
-    constructor() {
-        if (!this.id) this.id = uuidV4();
-    }
+export interface ISpecification {
+    _id?: String;
+    name?: String;
+    description?: String;   
+    created_at?: Date;
 }
 
-export { Specification };
+const specificationSchema: Schema<ISpecification> = schema({
+     
+    name: { type: String, required: true },
+
+    email:  { type: String, required: true },
+
+    password:  { type: String, required: true },
+
+    driver_license:  { type: String, required: true },
+
+    isAdmin:  { type: Boolean, required: false },
+
+    avatar: { type: String, required: true },
+
+    created_at: { type: String, dafault: Date.now },
+});
+
+export default specificationSchema
+

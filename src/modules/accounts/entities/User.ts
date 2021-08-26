@@ -1,36 +1,32 @@
-import { v4 as uuidV4 } from "uuid"
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm"
+// import { Schema } from "mongoose";
+// import schema from '../../../utils/SchemaUtils';
 
-@Entity("users")
-class User {
-    @PrimaryColumn()
-    id: string;
+// export interface IUser {
+//     _id?: String;
+//     name?: String;
+//     password?: String;
+//     email?: String;
+//     driver_license?: String;
+//     avatar?: String;
+//     isAdmin?: boolean;
+//     created_at?: Date;
+// }
 
-    @Column()
-    name: string;
+// const userSchema: Schema<IUser> = schema({
+     
+//     name: { type: String, required: true },
 
-    @Column()
-    email: string;
+//     email:  { type: String, required: true },
 
-    @Column()
-    password: string;
+//     password:  { type: String, required: true },
 
-    @Column()
-    driver_license: string;
+//     driver_license:  { type: String, required: true },
 
-    @Column()
-    isAdmin: boolean;
+//     isAdmin:  { type: Boolean, required: false },
 
-    @Column()
-    avatar: string;
+//     avatar: { type: String, required: true },
 
-    @CreateDateColumn()
-    created_at: Date;
+//     created_at: { type: String, dafault: Date.now },
+// });
 
-    constructor() {
-        if (!this.id) {
-            this.id = uuidV4();
-        }
-    }
-}
-export { User }
+// export default userSchema

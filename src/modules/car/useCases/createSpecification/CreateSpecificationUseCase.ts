@@ -8,10 +8,8 @@ interface IRequest {
     description: string;
 }
 
-@injectable()
 class CreateSpecificationUseCase {
     constructor(
-        @inject("SpecificationsRepository")
         private specificationRepository: ISpecificationsRepository) {}
     
         async execute({ name, description }: IRequest): Promise<void> {

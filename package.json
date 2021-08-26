@@ -5,8 +5,7 @@
   "license": "MIT",
   "scripts": {
     "devteste": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "dev:server": "set NODE_ENV=dev & ts-node-dev src/server.js",
-    "dev:start": "sh -ac '. ./.env; ts-node-dev --inspect --ignore-watch node_modules src/server.ts'",
+    "dev:start": "sh -ac '. ./.env; ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts'",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
   },
   "devDependencies": {

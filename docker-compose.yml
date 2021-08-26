@@ -7,22 +7,19 @@ services:
     env_file: 
       - .env 
     ports:
-      - "${DB_PORT}:27017"
+      - 27017:27017
     volumes: 
-        -dbdata-volume:/data/db
+     - dbdata-volume:/data/db
     environment:
-       MONGO_INITDB_USERNAME: ${DB_USERNAME}
-       MONGO_INITDB_PASSWORD: ${DB_PASSWORD}
-       MONGO_INITDB_DATABASE: ${DB_DATABASE}
-
+      - MONGO_INITDB_USERNAME: ${DB_USER}
+      - MONGO_INITDB_DATABASE: ${DB_HOST}
+      - MONGO_INITDB_PASSORD: ${DB_PASS}
   app:
     build: .
     container_name: webmotorsclone
-    restart: always
-    env_file: 
-      - .env  
+    restart: always   
     ports:
-      - ${APP_PORT}:${APP_PORT}
+      - 3333:3333
     volumes: 
        - .:/usr/app
     links:
@@ -31,3 +28,4 @@ services:
       - database
 volumes:
     dbdata-volume:
+        driver: local

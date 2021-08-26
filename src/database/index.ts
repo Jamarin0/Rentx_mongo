@@ -1,7 +1,7 @@
 import { connect } from 'mongoose';
 
 require('dotenv').config({
-  path: (process.env.NODE_ENV || '').trim() === 'local' ? 'local' : '.env.dev'
+  path: (process.env.NODE_ENV || '').trim() === 'local' ? 'local' : '.env'
 });
 
 class ConnectionDb {
@@ -17,7 +17,7 @@ class ConnectionDb {
     };
 
     const mongouri: string = <string>process.env.MONGO_URI;
-    await connect(mongouri, options);
+    await connect(mongouri, options); 
   }
 }
 
