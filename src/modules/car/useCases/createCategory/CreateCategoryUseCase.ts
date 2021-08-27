@@ -1,26 +1,22 @@
-// import { AppError } from "../../../../errors/AppError";
-// import { ICategory } from "../../entities/Category";
-// import { categorySchema } from "../../repositories/implementations/CategoriesRepository
+import { AppError } from "../../../../errors/AppError";
+import { ICategory } from "../../entities/Category";
+import CategoryRepository from "../../repositories/implementations/CategoriesRepository";
 
-// interface IRequest {
-//     name: string;
-//     description: string;
-// }
+class CreateCategoryUseCase {   
 
-// class CreateCategoryUseCase {
-//     constructor(
-//         private categoriesRepository: ICategoriesRepository) { }
+    async execute(categories: ICategory): Promise<ICategory> {      
+        const {name} = categories;
+        const categoriesAlreadyExists = await CategoryRepository.findOne(
+            {name});
 
-//     async execute({ description, name }: IRequest): Promise<void> {
-//         const categoriesAlreadyExists = await this.categoriesRepository.findByName(
-//             name
-//         );
+        if (categoriesAlreadyExists) {
+            throw new AppError("Category Already exists!");
+        }
+        console.log("aqui existe",categoriesAlreadyExists)
+        CategoryRepository.create(categories);
+        console.log("aqui salvou",categoriesAlreadyExists)
 
-//         if (categoriesAlreadyExists) {
-//             throw new AppError("Category Already exists!");
-//         }
-//         this.categoriesRepository.create({ name, description });
-//     }
-// }
+    }
+}
 
-// export { CreateCategoryUseCase };
+export { CreateCategoryUseCase };
