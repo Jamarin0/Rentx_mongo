@@ -1,28 +1,20 @@
-import { Schema } from "mongoose";
-import schema from '../../../utils/SchemaUtils';
+import { Document, model, Schema } from "mongoose";
 
-export interface ICategory {
+export interface ICategory extends Document {
     _id?: String;
     name?: String;
-    description?: String;   
+    description?: String;
     created_at?: Date;
 }
 
-const categorySchema: Schema<ICategory> = schema({
-     
-    name: { type: String, required: true },
+const CategorySchema = new Schema(
+    {
+        name: { type: String, required: true },
 
-    email:  { type: String, required: true },
+        description: { type: String, required: true },
 
-    password:  { type: String, required: true },
+        created_at: { type: String, dafault: Date.now },
+    }
+);
 
-    driver_license:  { type: String, required: true },
-
-    isAdmin:  { type: Boolean, required: false },
-
-    avatar: { type: String, required: true },
-
-    created_at: { type: String, dafault: Date.now },
-});
-
-export default categorySchema
+export const categoryModel = model<ICategory>('Category', CategorySchema);
